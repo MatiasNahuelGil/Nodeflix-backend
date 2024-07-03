@@ -1,0 +1,809 @@
+
+:root{
+  /*********** VARIABLES COLORES **********/
+  --color-primary   : #000;
+  --color-secondary : #fff;
+  --color-tertiary  : #00bfff;
+  --color-fourth    : #00acee;
+  --color-fifth     : #045f75;
+  --color-sixth     : #333;
+  
+  /*********  VARIABLES FUENTES **********/
+  --font-montserrat: 'Montserrat', sans serif;
+  --font-krona: 'Krona One', sans serif;
+}
+
+/**********************   RESETEO  ***********************/
+*{
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+ 
+}
+
+body{
+  font-family: var(--font-montserrat);
+}
+
+
+
+
+/**********************   MENÚ DE NAVEGACIÓN ***********************/
+.navbar{
+  background-color: var(--color-primary) !important;
+  color: #fff;
+}
+
+
+.navbar-nav{
+  width: 100%;
+  
+}
+
+
+
+
+.navbar-toggler{
+  border: 0;
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus{
+ outline: none;
+ box-shadow: none;
+ border: 0;
+}
+
+.toggler-icon{
+  width: 30px;
+  height: 3px;
+  background-color: var(--color-secondary);
+  display: block;
+  transition: all 0.2s;
+}
+
+.middle-bar{
+  margin: 5px auto;
+}
+
+.navbar-toggler .top-bar{
+  transform: rotate(45deg);
+  transform-origin: 10% 10%;
+}
+
+.navbar-toggler .middle-bar{
+  opacity: 0;
+  filter: alpha(opacity-0);
+
+  
+}
+
+.navbar-toggler .bottom-bar{
+ transform: rotate(-45deg);
+  transform-origin: 10% 10%;
+}
+
+.navbar-toggler.collapsed .top-bar{
+  transform: rotate(0);
+}
+
+.navbar-toggler.collapsed .middle-bar{
+  opacity: 1;
+  filter: alpha(opacity-100);
+}
+
+.navbar-toggler.collapsed .bottom-bar{
+  transform: rotate(0);
+}
+
+.navbar-toggler.navbar-toggler.collapsed .toggler-icon{
+  background-color: var(--color-secondary);
+}
+
+
+
+/******************** MIS ESTILOS**************************/
+.background-main{
+  background-color: var(--color-primary);
+}
+
+/**********************  HEADER ***********************/
+.font-krona-color{
+  color: var(--color-tertiary);
+}
+
+header{
+
+background-color: var(--color-primary);
+}
+
+
+.container-title{
+position: relative;
+padding-left: 2em;
+top: 12em;
+}
+
+.search-container h1{
+  font-family: var(--font-krona);
+}
+
+
+
+.bg-title{
+
+  color: var(--color-tertiary);
+}
+
+
+/**********************   BUSCADOR + TITULO  ***********************/
+.search-container input{
+display: block;
+padding: 10px;
+width: 300px;
+margin: auto;
+border-radius: 15px;
+border: none;
+outline: 3px solid var(--color-tertiary);
+}
+
+.span-search{
+  font-family: var(--font-krona);
+  color: var(--color-tertiary);
+}
+
+
+.brand-title{
+  font-family: var(--font-krona);
+font-size: 5em;
+}
+
+.nav-link{
+color: grey;
+}
+
+.nav-link:hover{
+color:var(--color-fifth);
+}
+
+.active{
+color: var(--color-secondary) !important;
+}
+
+
+/**********************   MAIN  ***********************/
+.main-form{
+display: flex;
+justify-content: center;
+padding: 25px;
+flex-direction: column;
+flex-wrap: wrap;
+}
+
+/**********************   CARRUSEL  ***********************/
+
+
+
+.carousel-inner{
+height: 25rem;
+}
+
+.img-container-carrousel img{
+height: 25rem;
+}
+
+
+
+/**********************   PELICULAS RECOMENDADAS  ***********************/
+.card-text a{
+color: var(--color-secondary);
+background-color: rgb(37, 41, 63);
+border-radius: 10px;
+padding: 7px;
+text-decoration: none;
+}
+
+.card-img{
+  height: 35em;
+  
+  transition: all 1s;
+}
+
+.card-img:hover{
+  border: 2px solid var(--color-fourth);
+}
+
+
+
+
+
+
+.button-description{
+  transition: all 0.5s;
+}
+
+.button-description:hover{
+  background-color: var(--color-fourth);
+  padding: 10px;
+  
+}
+
+
+/**********************   FORMULARIO DE CONTACTO  ***********************/
+
+.form-container {
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 350px;
+padding: 20px;
+border-radius: 20px;
+position: relative;
+background-color: #1a1a1a;
+color: var(--color-secondary);
+border: 1px solid var(--color-sixth);
+
+}
+
+.title {
+font-size: 28px;
+font-weight: 600;
+letter-spacing: -1px;
+position: relative;
+display: flex;
+align-items: center;
+padding-left: 30px;
+color: var(--color-secondary);
+}
+
+.title::before {
+width: 18px;
+height: 18px;
+}
+
+.title::after {
+width: 18px;
+height: 18px;
+animation: pulse 1s linear infinite;
+}
+
+.title::before,
+.title::after {
+position: absolute;
+content: "";
+height: 16px;
+width: 16px;
+border-radius: 50%;
+left: 0px;
+background-color: var(--color-tertiary);
+}
+
+.message, 
+.signin {
+font-size: 14.5px;
+color: rgba(255, 255, 255, 0.7);
+}
+
+.signin {
+text-align: center;
+}
+
+.signin a:hover {
+text-decoration: underline royalblue;
+}
+
+.signin a {
+color: var(--color-tertiary);
+}
+
+.flex {
+display: flex;
+width: 100%;
+gap: 6px;
+}
+
+.form-container label {
+position: relative;
+}
+
+.form-container label .input-contact {
+background-color: var(--color-sixth);
+color: #fff;
+width: 100%;
+padding: 20px 05px 05px 10px;
+outline: 0;
+border: 1px solid rgba(105, 105, 105, 0.397);
+border-radius: 10px;
+}
+
+.form-container label .input-contact + span {
+color: rgba(255, 255, 255, 0.5);
+position: absolute;
+left: 10px;
+top: 0px;
+font-size: 0.9em;
+cursor: text;
+transition: 0.3s ease;
+}
+
+.form-container label .input-contact:placeholder-shown + span {
+top: 12.5px;
+font-size: 0.9em;
+}
+
+.label-name, .label-lastname{
+width: 50%;
+}
+
+.form-container label .input-contact:focus + span,
+.form-container label .input-contact:valid + span {
+color: var(--color-tertiary);
+top: 0px;
+font-size: 0.7em;
+font-weight: 600;
+}
+
+.form-container label textarea{
+width: 100%;
+padding: 10px;
+}
+
+.input-contact {
+font-size: medium;
+}
+
+.submit {
+border: none;
+outline: none;
+padding: 10px;
+border-radius: 10px;
+color: var(--color-secondary);
+font-size: 16px;
+transform: .3s ease;
+background-color: var(--color-tertiary);
+}
+
+.submit:hover {
+background-color: #00bfff96;
+}
+
+@keyframes pulse {
+from {
+  transform: scale(0.9);
+  opacity: 1;
+}
+
+to {
+  transform: scale(1.8);
+  opacity: 0;
+}
+}
+
+
+
+/**********************   RUTA PELICULAS ***********************/
+
+.modal-descripcion{
+   border: 3px solid var(--color-fourth);
+   padding: 10px;
+   border-radius: 10px;
+}
+
+
+/**********************   RUTA TIENDA  ***********************/
+.store-container{
+  border: 1px solid var(--color-secondary);
+}
+
+.button-store-container{
+  
+  width: inherit;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-store{
+  text-align: center;
+  text-decoration: none;
+  background-color: #1a1a1a;
+  border: 1px solid var(--color-tertiary);
+  color: var(--color-secondary);
+  padding: 10px;
+  width: 50%;
+}
+
+.button-store:hover{
+  color: var(--color-secondary);
+  background-color: var(--color-fifth);
+}
+
+
+
+.store-img{
+  width: 100%;
+  height: 25em;
+  cursor: nw-resize;
+  border: 1px solid var(--color-tertiary);
+  
+}
+
+
+/**********************   ALTA CONFIRMADA ***********************/
+.img-done{
+  background-color: var(--color-primary);
+  height: 25em;
+}
+
+/**********************   BOTONES DEL CRUD  ***********************/
+
+.link-createMovie{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+  margin: auto;
+  width: 20%;
+  border-radius: 1em;
+  border: 1px solid var(--color-tertiary);
+}
+
+.link-createMovie:hover{
+  background-color: var(--color-fourth);
+}
+
+
+.delete-button:hover, .cancel-button:hover, .update-button:hover, .create-button:hover{
+  background-color: var(--color-fourth);
+}
+
+
+
+/**********************   VISTA DE PELICULA  ***********************/
+
+
+.seeMovie-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100vh;
+  border: 10px solid var(--color-secondary);
+}
+
+.play-img{
+  display: block;
+  margin: auto;
+  width: 80px;
+  height: 80px;
+}
+
+/**********************   LOGIN  ***********************/
+
+
+.img-login-container{
+  display: block;
+  margin-left: auto;
+  
+  }
+  
+  .img-login{
+  
+  border-radius: 50%;
+  padding: 2px;
+  border: 1px solid white;
+  }
+  
+  .modal-header{
+    background-color: var(--color-tertiary);
+  }
+  
+  .login-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    max-width: 100%;
+    margin: 0 auto;
+
+  }
+  
+  .login-container input{
+    width: 100%;
+    padding: 10px;
+    margin-top: 30px;
+  }
+  
+  .login-btn, .register-btn{
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--color-tertiary);
+  }
+  
+  .login-btn:hover,.register-btn:hover{
+    background-color: var(--color-fourth);
+  }
+  
+  .error{
+    color: rgb(255, 81, 81);
+  }
+  
+  .escondido{
+    display: none;
+  }
+  
+  .sr-only{
+    position:absolute;
+    left:-10000px;
+    top:auto;
+    width:1px;
+    height:1px;
+    overflow:hidden;
+  }
+  
+  
+  /**** REGISTRO  ****/
+  
+
+
+ .register-container{
+  text-align: center;
+  padding: 10px;
+  margin: auto;
+  width: 30em;
+  border: 1px solid white;
+  border-radius: 10px;
+ }
+  
+  #register-form{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 15px 60px;
+    width: 100%;
+    gap: 2em;
+    
+   
+  }
+
+  #register-form input{
+    padding: 10px;
+  }
+
+/**********************   RUTA BUSQUEDA  ***********************/
+
+
+
+/**********************   FOOTER   ***********************/
+
+footer {
+ height: 300px;
+ background-color: rgb(10, 10, 10)!important;
+}
+
+/**Footer links **/
+.footer-links-container{
+display: flex;
+flex-wrap: wrap;
+gap: 1em;
+justify-content: center;
+padding: 2em;
+}
+
+.footer-links-container a{
+text-decoration: none;
+color: grey;
+transition: all 0.5s;
+}
+
+.footer-links-container a:hover{
+
+color: var(--color-secondary);
+}
+
+/*Redes sociales*/
+
+.networks{
+  margin: auto;
+  position: relative;
+  top: 2em;
+  
+
+}
+
+.card-network {
+  width: 100%;
+  height: fit-content;
+  background-color: var(--background-main-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 25px;
+  gap: 20px;
+  box-shadow: 0px 0px 20px rgb(56, 58, 59);
+}
+
+/* for all social containers*/
+.socialContainer {
+  width: 52px;
+  height: 52px;
+  border-radius: 5px;
+  background-color: rgb(44, 44, 44);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition-duration: 0.3s;
+}
+/* instagram*/
+.containerOne:hover {
+  background-color: #d62976;
+  transition-duration: 0.3s;
+}
+/* twitter*/
+.containerTwo:hover {
+  background-color: var(--color-fourth);
+  transition-duration: 0.3s;
+}
+/* linkdin*/
+.containerThree:hover {
+  background-color: var(--color-tertiary);
+  transition-duration: 0.3s;
+}
+/* Whatsapp*/
+.containerFour:hover {
+  background-color: green;
+  transition-duration: 0.3s;
+}
+
+.socialContainer:active {
+  transform: scale(0.9);
+  transition-duration: 0.3s;
+}
+
+.socialSvg {
+  width: 17px;
+}
+
+.socialSvg path {
+  fill: var(--color-secondary);
+}
+
+.socialContainer:hover .socialSvg {
+  animation: slide-in-top 0.3s both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+/***************    QUERIES   ***************/
+
+/*Small devices (landscape phones, 576px and up)*/
+@media (max-width: 576px) {
+.footer-links-container {
+  
+  justify-content: start;
+  
+}
+.form-container{
+  margin: auto;
+  width: 100%;
+}
+.card-movie{
+  width: 100%;
+}
+
+}
+
+@media (min-width: 580px){
+.form-container{
+  width: 70%;
+  margin: auto;
+}
+.card-movie{
+  width: 50%;
+}
+}
+/*Medium devices (tablets, 768px and up)*/
+
+@media (max-width:750px){
+.inactive{
+  display: none;
+}
+}
+
+@media (min-width: 768px) {
+ .card-text{
+  position: relative;
+  top: 16em;
+}
+.featured-container img{
+  height: 45em;
+  object-fit: fill;
+  object-position: center;
+}
+.form-container{
+  width: 90%;
+  margin: auto;
+}
+
+}
+
+
+
+/*Large devices (desktops, 992px and up)*/
+@media (max-width:992px){
+.brand-title{
+  display: none;
+}
+
+
+}
+
+@media (min-width: 992px){
+.bars__menu{
+  visibility: hidden;
+}
+.navbar-brand{
+  display: none;
+}
+.form-container{
+  width: 37.5rem;
+  margin-left: auto;
+  margin-right: 10%;
+  border: 1px solid white;
+}
+.card-movie{
+  width: 25%;
+}
+
+.card{
+  
+  transition: all 0.5s;
+  
+}
+.card:hover{
+  position: relative;
+  transform: scale(1.2,1);
+  z-index: 100;
+  cursor:pointer;
+  border: 1px solid var(--color-fourth);
+}
+
+.card-favorites{
+  transition: all 0.5s;
+}
+
+.card-favorites:hover{
+  transform: scale(1.1,1.1);
+}
+
+}
+
+/*X-Large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {
+ 
+}
+
+/* XX-Large devices (larger desktops, 1400px and up)*/
+@media (min-width: 1600px) {
+  .form-container{
+    width: 62.5rem;
+  }
+}

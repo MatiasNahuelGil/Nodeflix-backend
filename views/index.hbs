@@ -1,0 +1,166 @@
+{{>header}}
+
+
+   <main class="background-main ">
+        {{>modal}}
+    <div class="search-container">
+      <h1 class="text-center text-white pt-4">Bienvenidos a Node<span class="font-krona-color">Flix </span></h1>
+      <form id="search-form" action="/busqueda" method="POST">
+        <label for="search"></label>
+        <input type="search" name="search" id="searchInput" placeholder="Buscar peliculas por titulo....">
+      </form>
+    </div>
+    <section class="carrousel-container p-5">
+         <article>
+          <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner  ">
+              <div class="carousel-item active " data-bs-interval="4000">
+                  <div class="row">
+                      <div class="col img-container-carrousel ">
+                           <img src="/images/accion/joker.jpg" class="d-block w-100 " alt="joker">
+                      </div>
+                      <div class="col img-container-carrousel inactive">
+                           <img src="/images/ficcion/planetaDeLosSimios.jpg"  class="d-block w-100 "  alt="planeta de los simios">
+                       </div>
+                      <div class="col img-container-carrousel inactive">
+                          <img src="images/accion/rapidosYFuriosos.jpg"  class="d-block w-100"  alt="rapidos y furiosos">
+                      </div>
+                  </div>
+               
+              </div>
+              <div class="carousel-item " data-bs-interval="4000">
+                <div class="row">
+                  <div class="col img-container-carrousel ">
+                       <img src="/images/romance/After.jpg" class="d-block w-100 " alt="after">
+                  </div>
+                  <div class="col img-container-carrousel inactive">
+                       <img src="/images/terror/Annabelle.jpg "  class="d-block w-100 "  alt="annabelle">
+                   </div>
+                  <div class="col img-container-carrousel inactive">
+                      <img src="/images/accion/madMax.jpg"  class="d-block w-100"  alt="mad max">
+                  </div>
+              </div>
+              </div>
+              <div class="carousel-item" data-bs-interval="4000">
+                <div class="row">
+                  <div class="col img-container-carrousel ">
+                       <img src="/images/romance/CuestionDeTiempo.jpg" class="d-block w-100 " alt="cuestion de tiempo">
+                  </div>
+                  <div class="col img-container-carrousel inactive">
+                       <img src="/images/ficcion/interstellar.jpg "  class="d-block w-100 "  alt="interstellar">
+                   </div>
+                  <div class="col img-container-carrousel inactive">
+                      <img src="/images/romance/crepusculo.jpg"  class="d-block w-100"  alt="crepusculo">
+                  </div>
+              </div>
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+         </article>
+    </section>
+
+    <section class="container">
+      <div class="row g-0">
+        <article class="col-12 text-center text-white">
+          <h1>Nuestras recomendaciones</h1>
+          <p class="fs-5">Aqui hay una selección de las peliculas mas vistas</p>
+        </article>  
+        {{#each data}}   
+         <article class="col-12 col-sm-6 col-lg-4">
+          <div class="card text-bg-dark border-0 rounded-0">
+            <img src="{{imagen}}" class="card-img" alt="{{titulo}}">
+            <div class="card-img-overlay bg-second-alpha-color d-flex flex-column justify-content-md-center"> 
+              <p class="card-text">
+                <a href="#" data-bs-toggle="modal" data-bs-target="{{idmodal}}" class="button-description">Descripción</a>
+              </p>
+             </div>
+            </div>
+           <div class="modal fade" id="{{modal}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                   <div class="modal-header">
+                          <h5 class="modal-title fs-5" id="exampleModalLabel">{{titulo}}</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                  <div class="modal-body">
+                     <p>
+                      {{descripcion}} 
+
+                     </p>
+                     <p>
+                      Fecha de estreno: {{anio}} <br>
+                      Duración : {{duracion_minutos}} minutos
+                      </p>
+                     <iframe width="560" height="315" src="{{trailer}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="img-fluid"></iframe>
+                  </div>
+                   
+                </div>
+              </div>
+          </div>
+        </article>
+        {{/each}}
+     </div>
+    </section>
+
+
+    <section class="container question-container pt-5">
+      <h2 class="text-center text-white pb-2">Preguntas frecuentes</h2>
+      <div class="accordion" id="accordionPanelsStayOpenExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+              ¿Qué es NodeFlix?
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+            <div class="accordion-body">
+              NodeFlix es un sitio web de streaming que te permitirá ver películas desde cualquier dispositivo en la mejor calidad siempre que se encuentre disponible en nuestro portal. No alojamos ningun material audiovisual en nuestros servidores, utilizamos enlaces de terceros para compartirlo en portal
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+              ¿Tengo que pagar?
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+            <div class="accordion-body">
+              Podes acceder a material gratuito de prueba, alquilar o comprar y tener el tiempo que quieras tu pelicula y aunque no alojamos ningún material, ya que no somos los propietarios, compartimos enlaces externos de otros servidores para que puedas disfrutar.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed fs-4" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+              Cuando quieras, donde quieras
+            </button>
+          </h2>
+          <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+            <div class="accordion-body ">
+              Si tienes un dispositivo móvil, pc, tablet o tv, puedes disfrutar de todo el contenido sin problemas.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main> 
+
+  <script>
+    /* document.getElementById('searchInput').addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      document.getElementById('searchForm').submit(); // Enviar el formulario
+    }
+    }); */
+  </script>
+
+{{>footer}}

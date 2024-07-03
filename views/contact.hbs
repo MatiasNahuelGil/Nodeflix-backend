@@ -1,0 +1,38 @@
+{{> header}}
+
+
+      <main class="main-form ">  
+        {{>modal}}
+       <section class="text-white container-title">
+          <h1 class="brand-title ">Node<span class="font-krona-color">Flix</span></h1>
+       </section>  
+         <form class="form-container">
+              <p class="title">Contactate con nosotros</p>
+          <div class="flex">
+              <label class="label-name">
+                  <input class="input-contact " type="text" placeholder=""  pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required title="Nombre solo acepta letras y espacios en blanco">
+                  <span>Nombre:</span>
+              </label>
+      
+              <label class="label-lastname">
+                  <input class="input-contact "  type="text" placeholder=""  pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$"  required title="Apellido solo acepta letras y espacios en blanco">
+                  <span>Apellido:</span>
+              </label>
+          </div>  
+                  
+          <label>
+              <input class="input-contact" type="email" placeholder="" required>
+              <span>Email:</span>
+          </label> 
+              
+          <label>
+               <textarea name="comments" id="comentarios" cols="30" rows="5" placeholder="Consulta:">
+                
+               </textarea>
+          </label>
+          <button class="submit">Enviar</button>
+         </form>
+       </main>
+     
+
+{{>footer}}

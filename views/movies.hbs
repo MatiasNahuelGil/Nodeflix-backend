@@ -1,0 +1,51 @@
+{{> header}}
+     
+     {{>modal}}
+    <section class="container">
+        
+          <div class="row g-0">
+            <h2 class="text-center text-white p-3">Nuestro catálogo de peliculas</h2>  
+               {{#each data}}
+        
+                <article class="col-12 col-sm-6 col-lg-4">
+                      <div class="card text-bg-dark border-0 rounded-0">
+                          <img src="{{imagen}}" class="card-img" alt={{titulo}}>
+                          <div class="card-img-overlay bg-second-alpha-color d-flex flex-column justify-content-md-center">
+                
+                              <p class="card-text">
+                                  <a href="#" data-bs-toggle="modal" data-bs-target={{idmodal}} class="button-description">Descripción</a>          
+                              </p>
+
+                        </div>
+                      </div>
+                       <div class="modal fade" id={{modal}} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                       <h5 class="modal-title fs-5" id="exampleModalLabel">{{titulo}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                <div class="modal-body ">
+                                   <p >
+                                      {{descripcion}}
+                                    </p>
+                                    <p>
+                                       Año de estreno : {{anio}} <br>
+                                       Duración : {{duracion_minutos}} minutos
+                                    </p>
+                                  
+                                    <iframe width="560" height="315" src={{trailer}} title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen class="img-fluid"></iframe>
+                                </div>
+                   
+                        </div>
+                </div>
+                     </div>
+                </article>
+                 
+               {{/each}}
+          </div>
+        
+    </section>
+
+
+{{> footer}}

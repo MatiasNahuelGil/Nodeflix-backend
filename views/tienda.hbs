@@ -1,0 +1,24 @@
+{{> header}}
+
+{{>modal}}
+<div class="container">
+    <h1 class="text-center text-white">Mi Tienda</h1>
+   <a href="/tienda/alta" class=" link-createMovie text-white">Agregar pelicula </a>
+</div>
+<section class="container   pt-5">
+  <article class="store-container d-flex flex-wrap">
+   {{#each  data}}
+   <div class="col-lg-3 col-md-6 col-12 card-favorite">
+     <div class="card-store">
+       <a href="/tienda/viendoPelicula " ><img src={{imagen}} alt="{{titulo}}" class="img-fluid store-img"></a>
+       <div class="button-store-container">
+       <a href="/tienda/modificar/{{id}}" class=" button-store">Editar</a>
+       <a href="/tienda/eliminar/{{id}}" class=" button-store">Eliminar</a>
+       </div>
+    </div>
+    </div>
+     {{/each}}
+  </article>
+</section>
+
+{{>footer}}

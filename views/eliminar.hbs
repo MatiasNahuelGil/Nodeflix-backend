@@ -1,0 +1,50 @@
+{{> header}}
+
+{{>modal}}
+<div class="container-fluid" style="background-color: rgb(0, 0, 0); height: auto;">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6">
+
+
+            <h1 class="text-center text-white p-2 mt-4 fs-1">¿Estás seguro que quieres eliminar la pelicula de tu lista?</h1>
+
+           {{#each data}}
+          
+
+             <form action="/tienda/eliminar/{{id}}" method="post" enctype="multipart/form-data">
+                <div class="form-group my-3">
+                    <label for="formGroupExampleInput">Nombre</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Ingrese su nombre" name="titulo" value="{{titulo}}" disabled>
+                </div>
+                <div class="form-group my-3">
+                    <label for="formGroupExampleInput2">Descripción</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Ingrese el detalle de la Obra" name="descripcion"  value="{{descripcion}}" disabled>
+                </div>
+
+                <div class="form-group my-3">
+                    <label for="exampleFormControlFile1">Imagen</label>
+                    <input type="file" class="form-control" id="exampleFormControlFile1" name="imagen" disabled>
+                    <label for="" class="text-white mt-2">{{imagen}}</label>
+
+                    <img src="{{imagen}}" class="mt-2" style="width: 100%;" alt="" >
+
+                </div>
+
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button type="submit" class="btn btn-secondary btn-block mt-5 delete-button">Eliminar</button>
+
+                    <a href="/tienda" class="btn btn-secondary btn-block mt-4 mb-4 cancel-button">Cancelar</a>
+                </div>
+            </form>   
+
+            {{/each}}  
+
+
+
+
+        </div>
+    </div>
+</div>
+
+
+{{>footer}}
