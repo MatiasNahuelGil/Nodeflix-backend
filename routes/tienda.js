@@ -1,8 +1,8 @@
 // Importar los módulos necesarios
-import express from 'express';
-import multer from 'multer';
-import fs from 'fs';
-import mysql from 'mysql2';
+const express = require('express');
+const multer = require('multer');
+const fs = require('fs');
+const mysql = require('mysql2');
 
 const router = express.Router();
 
@@ -10,14 +10,7 @@ const router = express.Router();
 const upload = multer({ dest: 'uploads/' });
 
 // Configuración de la conexión a MySQL
-const connection = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Matias-619',
-    database: 'nodeflix'
-});
-
-connection.connect();
+const connection = require("../db/db");
 
 /* Ruta para ver favoritos */
 router.get('/', (req, res, next) => {
@@ -98,4 +91,4 @@ router.post('/eliminar/:id', (req, res, next) => {
     });
 });
 
-export default router;
+module.exports = router;

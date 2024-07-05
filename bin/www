@@ -4,11 +4,9 @@
  * Module dependencies.
  */
 
-import app from '../app.js';
-import debug from 'debug';
-import http from 'http';
-
-const debugLog = debug('backend:server');
+const app = require('../app');
+const debug = require('debug')('backend:server');
+const http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -88,5 +86,5 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debugLog('Listening on ' + bind);
+  debug('Listening on ' + bind);
 }

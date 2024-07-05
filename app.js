@@ -1,34 +1,20 @@
-import createError from 'http-errors';
-import express from 'express';
-import mysql from 'mysql2';
-import path from 'path';
-import cookieParser from 'cookie-parser';
-import logger from 'morgan';
-import hbs from 'hbs';
-import { fileURLToPath } from 'url';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-import {methods as authentication} from "./controllers/authentication.controller.js"
-import {methods as authorization} from "./middlewares/authorization.js";
+const createError = require('http-errors');
+const express = require('express');
+const mysql = require('mysql2');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
+const hbs = require('hbs');
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const moviesRouter = require('./routes/movies');
+const contactRouter = require('./routes/contact');
+const storeRouter = require('./routes/tienda');
+const registerRouter = require('./routes/register');
+const searchRouter = require('./routes/search');
 
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'Matias-619',
-  database: 'nodeflix'
-});
 
-connection.connect();
-
-/*ROUTES*/ 
-import indexRouter from './routes/index.js';
-import usersRouter from './routes/users.js';
-import moviesRouter from './routes/movies.js';
-import contactRouter from './routes/contact.js';
-import storeRouter from './routes/tienda.js';
-import registerRouter from './routes/register.js';
-import searchRouter from './routes/search.js'
-
+const connection = require("./db/db");
 
 const app = express();
 
@@ -38,25 +24,20 @@ app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
 
-/*Rutas para las vistas */
-app.use('/', authorization.soloPublico,indexRouter);
-app.use('/users', authorization.soloPublico,usersRouter);
-app.use('/movies', authorization.soloPublico,moviesRouter);
-app.use('/contact', authorization.soloPublico,contactRouter);
-app.use('/tienda', authorization.soloPublico,storeRouter);
-app.use('/registro', authorization.soloPublico,registerRouter);
-app.use('/busqueda',authorization.soloPublico,searchRouter)
+/* Rutas para las vistas */
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/movies', moviesRouter);
+app.use('/contact', contactRouter);
+app.use('/tienda', storeRouter);
+app.use('/registro', registerRouter);
+app.use('/busqueda', searchRouter);
 
-
-
-
-app.post("/api/login", authentication.login);
-app.post("/api/register", authentication.register);
 app.post('/busqueda', (req, res) => {
   const searchTerm = req.body.search; // Obtener el término de búsqueda desde el formulario
   const query = `SELECT * FROM peliculas WHERE titulo LIKE '%${searchTerm}%'`;
@@ -64,15 +45,13 @@ app.post('/busqueda', (req, res) => {
   connection.query(query, (error, results) => {
     if (error) throw error;
 
-    if(results.length === 0 || !searchTerm){
-      res.render('sinResultados', {searchTerm});
-    }else{
-      res.render('busqueda', { data: results }); // Renderizar la vista de resultados de búsqueda 
+    if (results.length === 0 || !searchTerm) {
+      res.render('sinResultados', { searchTerm });
+    } else {
+      res.render('busqueda', { data: results }); // Renderizar la vista de resultados de búsqueda
     }
-    
   });
 });
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -89,4 +68,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-export default app;
+module.exports = app;

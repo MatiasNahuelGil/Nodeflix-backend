@@ -1,15 +1,21 @@
-import mysql from "mysql2";
+const mysql = require ('mysql2')
 
-var connection = mysql.createConnection({
+const connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'Matias-619',
-  database : 'nodeflix'
+  password : '12345',
+  database : 'nodeflix',
 
 
 });
  
-connection.connect();
+connection.connect((error)=>{
+  if (error){
+    console.log('El error de conexión es : '+ error)
+    return
+  }
+  console.log('Conectado a la base de datos MySQL')
+});
 
-//module.exports = connection;
-export const db = connection;
+
+module.exports = connection;

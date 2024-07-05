@@ -1,30 +1,23 @@
 // Importar los módulos necesarios
-import express from 'express';
-import mysql from 'mysql2/promise'; // Usamos mysql2/promise para manejar conexiones promisificadas
-
+const express = require('express');
+const mysql = require('mysql2');
 
 const router = express.Router();
 
 // Configuración de la conexión a MySQL
-const connection = await mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'Matias-619',
-    database: 'nodeflix'
-});
-
+const connection = require("../db/db");
 
 /* GET movies page */
-router.get('/', async (req, res, next) => {
-    try {
-        // Consulta a la base de datos
-        const [resultsMovies, fields] = await connection.execute('SELECT * FROM peliculas');
-
+router.get('/', (req, res, next) => {
+    // Consulta a la base de datos
+    connection.query('SELECT * FROM peliculas', (error, results, fields) => {
+        if (error) {
+            next(error); // Pasar el error al siguiente middleware de manejo de errores
+            return;
+        }
         // Renderizar la vista 'movies' con los datos obtenidos
-        res.render('movies', { data: resultsMovies });
-    } catch (error) {
-        next(error); // Pasar el error al siguiente middleware de manejo de errores
-    }
+        res.render('movies', { data: results });
+    });
 });
 
-export default router; // Exportar el router para que pueda ser importado
+module.exports = router; // Exportar el router para que pueda ser importado
