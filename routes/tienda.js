@@ -4,6 +4,7 @@ const multer = require('multer');
 const fs = require('fs');
 const mysql = require('mysql2');
 
+
 const router = express.Router();
 
 // Configuración de multer para la carga de archivos
@@ -11,6 +12,8 @@ const upload = multer({ dest: 'uploads/' });
 
 // Configuración de la conexión a MySQL
 const connection = require("../db/db");
+
+
 
 /* Ruta para ver favoritos */
 router.get('/', (req, res, next) => {
@@ -20,6 +23,7 @@ router.get('/', (req, res, next) => {
         res.render('tienda', { data: results });
     });
 });
+
 
 /* Ruta para ver la película */
 router.get('/viendoPelicula', (req, res, next) => {

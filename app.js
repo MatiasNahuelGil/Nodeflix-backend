@@ -5,6 +5,10 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('hbs');
+const bodyParser = require('body-parser');
+
+
+//RUTAS
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const moviesRouter = require('./routes/movies');
@@ -14,6 +18,8 @@ const registerRouter = require('./routes/register');
 const searchRouter = require('./routes/search');
 
 
+
+//CONECCIÓN A BASE DE DATOS
 const connection = require("./db/db");
 
 const app = express();
@@ -25,6 +31,7 @@ app.set('view engine', 'hbs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}))
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 hbs.registerPartials(path.join(__dirname, 'views/partials'));
@@ -37,6 +44,7 @@ app.use('/contact', contactRouter);
 app.use('/tienda', storeRouter);
 app.use('/registro', registerRouter);
 app.use('/busqueda', searchRouter);
+
 
 app.post('/busqueda', (req, res) => {
   const searchTerm = req.body.search; // Obtener el término de búsqueda desde el formulario
