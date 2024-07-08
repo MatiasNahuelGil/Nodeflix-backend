@@ -1,57 +1,78 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const users = require('../models/userModel');
-const config = require('../config/config');
-const { token } = require('morgan');
+const mysql = require('mysql2');
+const connection = require('../db/db'); // Asumiendo que este archivo exporta la conexión a la base de datos
+const { promisify } = require('util');
+require('dotenv').config();
 
+const query = promisify(connection.query).bind(connection);
 
+exports.register = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 8);
+        
+        const sql = 'INSERT INTO usuario SET ?';
+        await query(sql, { user: username, password: hashedPassword });
 
-
-//Funcion de registro
-function register(req,res)  {
-     const {username,password} = req.body;
-     
-     console.log(`Registrando usuario: ${username}, contraseña: ${password}`);
-     const hashedPassword = bcrypt.hashSync(password,8);
-
-     const newUser = {id : users.length + 1, username, password: hashedPassword};
-
-     users.push(newUser);
-
-     const token = jwt.sign({id: newUser.id},config.secretKey, {expiresIn: config.tokenExpiresIn});
-
-     res.status(200).json({ auth: true, token });
+        res.redirect('/');
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al registrar usuario' });
+    }
 };
 
-//funcion de inicio de sesion 
+exports.login = async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Por favor ingrese usuario y contraseña' });
+        }
 
-function login(req,res) {
+        const sql = 'SELECT * FROM usuario WHERE user = ?';
+        const results = await query(sql, [username]);
 
-    const {username, password} = req.body;
+        if (results.length === 0 || !(await bcrypt.compare(password, results[0].password))) {
+            return res.status(401).json({ error: 'Usuario o contraseña incorrecta' });
+        }
 
-    const user = users.find( u=> u.username === username);
+        const userId = results[0].id;
+        const token = jwt.sign({ id: userId }, process.env.JWT_SECRETO, {
+            expiresIn: process.env.JWT_TIEMPO_EXPIRA
+        });
 
-    if(!user) return res.status(404).send('User not found');
+        const cookieOptions = {
+            expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES * 24 * 60 * 60 * 1000),
+            httpOnly: true
+        };
 
-    const passwordIsValid = bcrypt.compareSync(password, user.password);
-
-    if(!passwordIsValid) return res.status(401).send({auth: false, token: null});
-
-    const token = jwt.sign({id: user.id}, config.secretKey, { expiresIn: config.tokenExpiresIn});
-
-    res.status(200).json({ auth: true, token });
+        res.cookie('jwt', token, cookieOptions);
+        res.status(200).render('index',{ message: `${username}` });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Error al iniciar sesión' });
+    }
 };
 
 
-function storeUser (req,res){
-    const data = req.body
-    console.log(data)
-    users.push(data);
-    res.status(200).json({ message: 'User stored successfully' });
-}
-
-module.exports = {
-    login,
-    register,
-    storeUser,
-}
+exports.isAuthenticated = async (req,res,next) => {
+    if(req.cookieOptions.jwt){
+        try{
+            const decodificada = await promisify(jwt.verify)(req.cookieOptions.jwt, process.env.JWT_SECRETO)
+            connection.query('SELECT * FROM usuario WHERE ID = ?', [decodificada.id], (error,results) =>{
+                if(!results){
+                    return next()
+                }
+                req.user = results[0]
+                return next()
+            })
+        }catch(error){
+             console.log(error)
+             return next()
+        }
+       }else{
+           res.redirect('/')
+           next
+        }
+    }

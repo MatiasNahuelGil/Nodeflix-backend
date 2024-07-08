@@ -16,6 +16,8 @@ const connection = require("../db/db");
 
 
 /* Ruta para ver favoritos */
+
+
 router.get('/', (req, res, next) => {
     // Seleccionamos todas las películas
     connection.query('SELECT * FROM peliculas', (error, results, fields) => {

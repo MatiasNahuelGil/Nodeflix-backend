@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('hbs');
 const bodyParser = require('body-parser');
-
+const dotenv = require('dotenv');
 
 //RUTAS
 const indexRouter = require('./routes/index');
@@ -17,7 +17,7 @@ const storeRouter = require('./routes/tienda');
 const registerRouter = require('./routes/register');
 const searchRouter = require('./routes/search');
 
-
+dotenv.config({path: './env/.env'})
 
 //CONECCIÓN A BASE DE DATOS
 const connection = require("./db/db");

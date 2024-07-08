@@ -4,7 +4,7 @@
    <main class="background-main ">
         {{>modal}}
     <div class="search-container">
-      <h1 class="text-center text-white pt-4">Bienvenidos a Node<span class="font-krona-color">Flix </span></h1>
+      <h1 class="text-center text-white pt-4">Bienvenido a Node<span class="font-krona-color">Flix </span>{{message}}</h1>
       <form id="search-form" action="/busqueda" method="POST">
         <label for="search"></label>
         <input type="search" name="search" id="searchInput" placeholder="Buscar peliculas por titulo....">

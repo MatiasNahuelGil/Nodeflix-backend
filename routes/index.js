@@ -2,7 +2,7 @@
 const express = require('express');
 const mysql = require('mysql2');
 const authController = require('../controllers/authController');
-// const authMiddleware = require('../middlewares/authMiddlewares');
+
 
 const router = express.Router();
 
@@ -28,12 +28,9 @@ router.get('/registro', (req, res, next) => {
 });
 
 router.post('/registro', authController.register);
-router.post('/registro', authController.storeUser);
+
 
 router.post('/', authController.login);
 
-// router.get('/tienda', authMiddleware, (req,res)=>{
-//   res.render('tienda')
-// });
 
 module.exports = router;
